@@ -101,18 +101,16 @@
     {
       "id": "web-analytics",
       "label": "Privacy-first website analytics",
-      "provider": "Cloudflare Web Analytics",
-      "status": "optional-disabled",
+      "provider": "Google Analytics 4 and Microsoft Clarity",
+      "status": "configured-pending-acceptance",
       "cost": "$0",
       "phiAllowed": false,
       "codeReady": true,
-      "accountReady": false,
-      "ownerDecisionNeeded": true,
+      "accountReady": true,
+      "ownerDecisionNeeded": false,
       "blockers": [
-        "Approve whether analytics is needed at launch.",
-        "Create the site in the office-controlled Cloudflare account.",
-        "Add and test the beacon without collecting form contents or patient information.",
-        "Update public privacy wording before enabling."
+        "Verify collection on the canonical production host after the separately authorized cutover.",
+        "Keep candidate previews, contact pages, patient-form pages, and private review tools excluded."
       ]
     },
     {

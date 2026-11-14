@@ -2,7 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AnnouncementBanner from '../components/AnnouncementBanner.astro';
-import CloudflareAnalytics from '../components/CloudflareAnalytics.astro';
+import PracticeAnalytics from '../components/PracticeAnalytics.astro';
 import SiteMetadata from '../components/SiteMetadata.astro';
 import site from '../data/site.json';
 import '../styles/global.css';
@@ -44,7 +44,7 @@ const fullAddress = `${site.address.street}, ${site.address.city}, ${site.addres
       imageAlt={imageAlt}
       themeColor="#004b66"
     />
-    <CloudflareAnalytics />
+    <PracticeAnalytics />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>

@@ -8,7 +8,7 @@
   "productionCutoverApproved": true,
   "indexingApproved": true,
   "inquiryLaunchMode": "preview-only",
-  "analyticsApproved": false,
+  "analyticsApproved": true,
   "changeWindow": "2026-08-13 21:30-23:30 America/New_York (owner-authorized after-hours cutover)",
   "rollbackOwner": "Eddie (authorized owner/delegate)",
   "reviewSupport": {

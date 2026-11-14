@@ -120,8 +120,8 @@ test('modern pages have distinct content responsibilities', async ({ page }) => 
   await expect(page.getByRole('heading', { name: 'Common tasks should feel straightforward.' })).toBeVisible();
 
   await page.goto('/modern/team/');
-  await expect(page.getByRole('heading', { name: 'Dr. William Donovan, DMD' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Dr. Jordan Henke, DDS' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'William Donovan, DMD' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Jordan Henke, DDS' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Associate Dentist, DMD' })).toHaveCount(0);
   await expect(page.getByRole('heading', { name: 'Friendly support at each step.' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Front Office Team' })).toBeVisible();

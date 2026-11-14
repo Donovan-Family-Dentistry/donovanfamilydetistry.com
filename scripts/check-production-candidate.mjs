@@ -45,8 +45,8 @@ if (!csp) failures.push('The global Content-Security-Policy header is missing.')
 if (/\bunsafe-eval\b/i.test(csp)) failures.push('Content-Security-Policy must not permit unsafe-eval.');
 if (/\bscript-src\b[^;]*'unsafe-inline'/i.test(csp)) failures.push('script-src must not permit unsafe-inline.');
 if (!cspDirective('script-src').includes("'sha256-__BUILD_TIME_SCRIPT_HASHES__'")) failures.push('script-src must retain the deterministic build-time hash placeholder.');
-if (cspDirective('script-src') !== "'self' 'sha256-__BUILD_TIME_SCRIPT_HASHES__' https://static.cloudflareinsights.com https://challenges.cloudflare.com") failures.push('script-src Cloudflare coverage must remain limited to the analytics and challenge origins.');
-if (cspDirective('connect-src') !== "'self' https://challenges.cloudflare.com https://cloudflareinsights.com") failures.push('connect-src Cloudflare coverage must remain limited to the challenge and analytics endpoints.');
+if (cspDirective('script-src') !== "'self' 'sha256-__BUILD_TIME_SCRIPT_HASHES__' https://challenges.cloudflare.com https://www.googletagmanager.com https://*.clarity.ms") failures.push('script-src must allow the approved analytics and challenge origins only.');
+if (cspDirective('connect-src') !== "'self' https://challenges.cloudflare.com https://www.google-analytics.com https://region1.google-analytics.com https://*.clarity.ms") failures.push('connect-src must allow the approved analytics and challenge endpoints only.');
 if (cspDirective('frame-src') !== "'self' https://challenges.cloudflare.com") failures.push('frame-src Cloudflare coverage must remain limited to the challenge origin.');
 if (cspDirective('style-src') !== "'self' 'unsafe-inline'") failures.push('style-src must retain the separately reviewed inline-style compatibility policy.');
 if (!headerBlockFor('/_astro/*').includes('Cache-Control: public, max-age=31536000, immutable')) failures.push('/_astro/* must use immutable one-year caching.');

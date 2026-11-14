@@ -1,6 +1,5 @@
 ---
 import AnnouncementBanner from '../components/AnnouncementBanner.astro';
-import CloudflareAnalytics from '../components/CloudflareAnalytics.astro';
 import SiteMetadata from '../components/SiteMetadata.astro';
 import site from '../data/site.json';
 import '../styles/modern.css';
@@ -79,7 +78,6 @@ const contextLabel = isReview
       themeColor="#fffdf9"
       forceNoIndex={forceNoIndex}
     />
-    <CloudflareAnalytics />
   </head>
   <body class={bodyClass}>
     <a class="modern-skip" href="#modern-main">Skip to main content</a>

@@ -1,0 +1,22 @@
+---
+---
+<script>
+  import Clarity from '@microsoft/clarity';
+  import { shouldLoadPracticeAnalytics } from '../utils/practice-analytics-policy.js';
+
+  if (shouldLoadPracticeAnalytics(window.location.hostname, window.location.pathname)) {
+    Clarity.init('zc6ml125xo');
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag(...args) {
+      window.dataLayer.push(args);
+    };
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-XZS6YLLQ27');
+
+    const googleTag = document.createElement('script');
+    googleTag.async = true;
+    googleTag.src = 'https://www.googletagmanager.com/gtag/js?id=G-XZS6YLLQ27';
+    document.head.append(googleTag);
+  }
+</script>

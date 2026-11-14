@@ -27,6 +27,7 @@
     "prebuild": "node scripts/check-inquiry-configuration.mjs && node scripts/check-editor-content.mjs && node scripts/check-launch-readiness.mjs && node scripts/check-production-candidate.mjs && node scripts/check-release15-readiness.mjs && node scripts/check-release16-readiness.mjs && node scripts/materialize-assets.mjs && node scripts/generate-responsive-images.mjs"
   },
   "dependencies": {
+    "@microsoft/clarity": "1.0.2",
     "astro": "7.4.7"
   },
   "devDependencies": {

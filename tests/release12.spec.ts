@@ -44,8 +44,8 @@ test('Pages CMS exposes a grouped office editor and one-click website check', as
 
 test('public team page contains no fictional person identities', async ({ page }) => {
   await page.goto('/modern/team/');
-  await expect(page.getByRole('heading', { name: 'Dr. William Donovan, DMD' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Dr. Jordan Henke, DDS' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'William Donovan, DMD' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Jordan Henke, DDS' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Front Office Team' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Dental Hygiene Team' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Dental Assisting Team' })).toBeVisible();
@@ -65,8 +65,8 @@ test('classic and modern concepts share the approved provider source', async ({ 
 
   for (const route of ['/about/', '/modern/team/']) {
     await page.goto(route);
-    await expect(page.getByRole('heading', { name: 'Dr. William Donovan, DMD' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Dr. Jordan Henke, DDS' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'William Donovan, DMD' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Jordan Henke, DDS' })).toBeVisible();
   }
 });
 

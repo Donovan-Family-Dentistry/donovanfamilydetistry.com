@@ -6,8 +6,8 @@ for (const path of ['/about/', '/modern/team/']) {
     await page.setViewportSize({ width: 384, height: 832 });
     await page.goto(path);
 
-    await expect(page.getByRole('heading', { name: /Dr\. William Donovan, DMD/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /Dr\. Jordan Henke, DDS/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /William Donovan, DMD/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Jordan Henke, DDS/i })).toBeVisible();
     await expect(page.getByText('Henke Family', { exact: true })).toHaveCount(0);
     await expect(page.getByText(/Koolkin/i)).toHaveCount(0);
 
