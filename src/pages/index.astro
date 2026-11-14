@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ActionButtons from '../components/ActionButtons.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import site from '../data/site.json';
+---
+<BaseLayout>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Family dentistry in Beaufort, South Carolina</p>
+        <h1>{site.tagline}</h1>
+        <p class="lead">{site.introduction}</p>
+        <ActionButtons />
+      </div>
+      <div class="hero-image">
+        <img
+          src={site.heroImage}
+          srcset="/images/office-exterior-480.webp 480w, /images/office-exterior-720.webp 720w, /images/office-exterior.webp 900w"
+          sizes="(max-width: 820px) calc(100vw - 2rem), 50vw"
+          width={site.heroImageWidth}
+          height={site.heroImageHeight}
+          alt={site.heroAlt}
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="services-heading">
+    <div class="container">
+      <p class="eyebrow">Our services</p>
+      <h2 id="services-heading">Comprehensive care, clearly presented</h2>
+      <p class="lead">Explore the dental procedures currently listed by Donovan Family Dentistry.</p>
+      <ServiceGrid />
+      <p style="margin-top: 1.5rem"><a class="button button--secondary" href="/services/">View all services</a></p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Meet the practice</p>
+        <h2>Experienced dentists, comprehensive family care</h2>
+        <p class="lead">Dr. William Donovan and Dr. Jordan Henke provide care for patients of all ages at Donovan Family Dentistry in Beaufort. Learn more about the dentists and their backgrounds.</p>
+        <a class="button button--secondary" href="/about/">Meet the dentists</a>
+      </div>
+      <aside class="info-panel" aria-labelledby="hours-heading">
+        <h2 id="hours-heading">Office hours</h2>
+        <table class="hours">
+          <tbody>
+            {site.hours.map((item) => <tr><th scope="row">{item.day}</th><td>{item.hours}</td></tr>)}
+          </tbody>
+        </table>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="container card-grid">
+      <article class="card"><p class="eyebrow">New patients</p><h3>Prepare before your visit</h3><p>Download the current patient paperwork and privacy notice.</p><a href="/forms/">Open patient forms</a></article>
+      <article class="card"><p class="eyebrow">Call</p><h3>{site.phoneDisplay}</h3><p>Contact the office directly during regular business hours.</p><a href={`tel:${site.phoneHref}`}>Call now</a></article>
+      <article class="card"><p class="eyebrow">Visit</p><h3>{site.address.street}</h3><p>{site.address.city}, {site.address.state} {site.address.postalCode}</p><a href="/contact/">Directions and hours</a></article>
+    </div>
+  </section>
+</BaseLayout>

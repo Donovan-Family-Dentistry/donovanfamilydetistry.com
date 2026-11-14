@@ -1,0 +1,67 @@
+---
+import ModernLayout from '../../layouts/ModernLayout.astro';
+import practiceContent from '../../data/practice-content.json';
+
+const about = practiceContent.about;
+const valuesPhrase = 'calm communication';
+const valuesPhraseIndex = about.valuesTitle.indexOf(valuesPhrase);
+const valuesTitleBefore = valuesPhraseIndex >= 0 ? about.valuesTitle.slice(0, valuesPhraseIndex) : about.valuesTitle;
+const valuesTitleAfter = valuesPhraseIndex >= 0 ? about.valuesTitle.slice(valuesPhraseIndex + valuesPhrase.length) : '';
+---
+<ModernLayout title="About the Practice | Donovan Family Dentistry" description="Learn about the care approach, patient experience, and Lowcountry setting of Donovan Family Dentistry.">
+  <section class="modern-page-hero">
+    <div class="modern-shell modern-page-hero__grid">
+      <div><p class="modern-kicker">{about.kicker}</p><h1>{about.headline}</h1></div>
+      <p class="modern-page-hero__aside">{about.introduction}</p>
+    </div>
+  </section>
+
+  <section class="modern-section">
+    <div class="modern-shell modern-visit-grid">
+      <article class="modern-visit-card">
+        <p class="modern-eyebrow">{about.storyEyebrow}</p>
+        <h2>{about.storyTitle}</h2>
+        {about.storyParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </article>
+      <aside class="modern-visit-card">
+        <p class="modern-eyebrow">{about.locationEyebrow}</p>
+        <h3>{about.locationTitle}</h3>
+        <p>{about.locationText}</p>
+        <div class="modern-actions"><a class="modern-button modern-button--primary" href="/modern/contact/">Contact and directions</a></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="modern-section modern-section--sea">
+    <div class="modern-shell">
+      <div class="modern-section__head">
+        <p class="modern-eyebrow">{about.valuesEyebrow}</p>
+        <h2 class="modern-values-title">
+          {valuesPhraseIndex >= 0 ? <>{valuesTitleBefore}<span class="modern-values-title__phrase">{valuesPhrase}</span>{valuesTitleAfter}</> : about.valuesTitle}
+        </h2>
+      </div>
+      <div class="modern-value-grid">
+        {about.values.map((value) => (
+          <article class="modern-value-card">
+            <div class="modern-value-icon">{value.number}</div>
+            <h3>{value.title}</h3>
+            <p>{value.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="modern-section">
+    <div class="modern-shell">
+      <div class="modern-section__head">
+        <p class="modern-eyebrow">{about.journeyEyebrow}</p>
+        <h2>{about.journeyTitle}</h2>
+      </div>
+      <div class="modern-card-grid">
+        {about.journey.map((item) => <article class="modern-card"><h3>{item.title}</h3><p>{item.text}</p></article>)}
+      </div>
+      <div class="modern-actions"><a class="modern-button modern-button--primary" href="/modern/team/">Meet the team</a><a class="modern-button modern-button--secondary" href="/modern/services/">Explore services</a></div>
+    </div>
+  </section>
+</ModernLayout>

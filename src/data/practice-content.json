@@ -1,0 +1,93 @@
+{
+  "about": {
+    "kicker": "About the practice",
+    "headline": "Rooted on Lady's Island. Focused on clear, comfortable care.",
+    "introduction": "Donovan Family Dentistry provides a welcoming local setting where patients can ask questions, understand their options, and prepare for the next step in their care.",
+    "storyEyebrow": "Our approach",
+    "storyTitle": "Experience translated into practical guidance.",
+    "storyParagraphs": [
+      "Donovan Family Dentistry serves patients from its Lady's Island office with an emphasis on understandable information, thoughtful planning, and a comfortable experience.",
+      "Dr. Donovan's path through dental laboratory work, advanced general-dentistry education, and Navy dentistry shaped a practical approach to care: look closely, explain what matters in plain language, and organize recommendations into steps patients can understand and plan for."
+    ],
+    "locationEyebrow": "The Lowcountry connection",
+    "locationTitle": "Close to home and easy to reach.",
+    "locationText": "Located at 91 Sams Point Road, the office is convenient to Lady's Island, downtown Beaufort, Port Royal, and surrounding Lowcountry communities.",
+    "valuesEyebrow": "What guides the experience",
+    "valuesTitle": "Useful information, calm communication, and a clear next step.",
+    "values": [
+      {
+        "number": "01",
+        "title": "Clear communication",
+        "text": "Patients receive practical explanations, understandable options, and time to ask questions before deciding on care."
+      },
+      {
+        "number": "02",
+        "title": "Comfortable visits",
+        "text": "A friendly team, organized process, and calm environment help reduce uncertainty from check-in through follow-up."
+      },
+      {
+        "number": "03",
+        "title": "Care across generations",
+        "text": "Information and services are presented with the needs of children, working adults, retirees, and caregivers in mind."
+      }
+    ],
+    "journeyEyebrow": "A smoother patient journey",
+    "journeyTitle": "Common tasks should feel straightforward.",
+    "journey": [
+      {
+        "title": "Before the visit",
+        "text": "Find office hours, directions, downloadable forms, and the right phone number without hunting through the site."
+      },
+      {
+        "title": "During the conversation",
+        "text": "Expect plain-language explanations and a treatment plan organized around health, comfort, priorities, and timing."
+      },
+      {
+        "title": "After the appointment",
+        "text": "Know what to expect next, when follow-up may be needed, and who to call with an administrative question."
+      }
+    ]
+  },
+  "teamPage": {
+    "kicker": "Meet the team",
+    "headline": "The people and roles behind a comfortable visit.",
+    "introduction": "Meet the dentist and the front-office, hygiene, and assisting teams who help each visit feel organized, informed, and welcoming.",
+    "providersEyebrow": "The dentist",
+    "providersTitle": "Experience, clear explanations, and a practical approach.",
+    "providersIntroduction": "Learn how education, service, and hands-on experience shape the practice's practical approach to patient care.",
+    "teamEyebrow": "Patient care team",
+    "teamTitle": "Friendly support at each step.",
+    "teamIntroduction": "From the first phone call through treatment and follow-up, each role helps patients understand what comes next and feel supported along the way."
+  },
+  "servicesPage": {
+    "kicker": "Services",
+    "headline": "Comprehensive care, easier to understand.",
+    "introduction": "Explore the practice's published procedures in patient-friendly groups, with clear context for the questions and examination that help determine an individual plan.",
+    "groups": [
+      {
+        "id": "restore",
+        "title": "Restorative care",
+        "summary": "Repair damaged teeth and restore function with materials and treatment options selected for the individual situation.",
+        "planning": "A clinical examination helps determine whether a filling, crown, bridge, implant, or another approach is appropriate.",
+        "order": 1
+      },
+      {
+        "id": "smile",
+        "title": "Smile and tooth replacement",
+        "summary": "Explore options intended to improve appearance, replace missing teeth, and support confidence in your smile.",
+        "planning": "Bring questions about appearance, comfort, maintenance, timing, and how each option may fit your goals.",
+        "order": 2
+      },
+      {
+        "id": "advanced",
+        "title": "Advanced and ongoing care",
+        "summary": "Address pain, infection, gum concerns, and teeth that may require more involved treatment.",
+        "planning": "Symptoms and urgency vary. Call the office so the team can explain the appropriate scheduling process.",
+        "order": 3
+      }
+    ],
+    "planningEyebrow": "Planning care",
+    "planningTitle": "Questions are part of the process.",
+    "planningText": "The website can explain categories and help patients prepare, but a dentist must evaluate the individual situation before recommending treatment."
+  }
+}

@@ -1,0 +1,140 @@
+---
+import ModernLayout from '../../layouts/ModernLayout.astro';
+import site from '../../data/site.json';
+
+const fullAddress = `${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.postalCode}`;
+const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`;
+const carePaths = [
+  {
+    title: 'Repair and restore',
+    copy: 'Start here when a tooth is damaged, missing, or no longer functioning comfortably.',
+    examples: ['Fillings and durable restorations', 'Crowns, bridges, and implants'],
+    href: '/modern/services/#restore'
+  },
+  {
+    title: 'Improve or replace',
+    copy: 'Explore options that address appearance, missing teeth, and confidence in your smile.',
+    examples: ['Whitening and smile improvements', 'Dentures and partials'],
+    href: '/modern/services/#smile'
+  },
+  {
+    title: 'Relieve and protect',
+    copy: 'Learn about care for pain, infection, gum concerns, and teeth that may need advanced treatment.',
+    examples: ['Root canal therapy and extractions', 'Gum-disease management'],
+    href: '/modern/services/#advanced'
+  }
+];
+---
+<ModernLayout>
+  <section class="modern-hero">
+    <div class="modern-shell modern-hero__grid">
+      <div>
+        <p class="modern-kicker">Lady's Island · Beaufort, South Carolina</p>
+        <h1>Your Lowcountry smile, cared for <em>close to home.</em></h1>
+        <p class="modern-lead">Comprehensive dental care for patients of all ages, delivered by a welcoming local team at 91 Sams Point Road.</p>
+        <div class="modern-actions">
+          <a class="modern-button modern-button--primary" href={`tel:${site.phoneHref}`}>Call the office</a>
+          <a class="modern-button modern-button--secondary" href="/modern/contact/">Request a call</a>
+          <a class="modern-button modern-button--secondary" href="/modern/forms/">Patient forms</a>
+        </div>
+      </div>
+      <div class="modern-hero__visual">
+        <img
+          src={site.heroImage}
+          srcset="/images/office-exterior-480.webp 480w, /images/office-exterior-720.webp 720w, /images/office-exterior.webp 900w"
+          sizes="(max-width: 820px) calc(100vw - 2rem), 50vw"
+          width={site.heroImageWidth}
+          height={site.heroImageHeight}
+          alt={site.heroAlt}
+          fetchpriority="high"
+          decoding="async"
+        />
+        <div class="modern-location-card">
+          <strong>At home in the Lowcountry</strong>
+          <span>On Lady's Island, minutes from downtown Beaufort.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modern-quickfacts">
+    <div class="modern-shell modern-quickfacts__grid">
+      <div class="modern-fact"><small>Office hours</small><strong>Monday-Thursday, 7:30-5</strong></div>
+      <div class="modern-fact"><small>Call</small><strong>{site.phoneDisplay}</strong></div>
+      <div class="modern-fact"><small>Visit</small><strong>91 Sams Point Road</strong></div>
+    </div>
+  </div>
+
+  <section class="modern-section" aria-labelledby="home-care-heading">
+    <div class="modern-shell">
+      <div class="modern-section__head">
+        <p class="modern-eyebrow">Find the right starting point</p>
+        <h2 id="home-care-heading">Begin with what you need today.</h2>
+        <p>Choose a care path for a quick overview, then visit the Services page for the full procedure list and more detail.</p>
+      </div>
+      <div class="modern-path-grid">
+        {carePaths.map((path) => (
+          <article class="modern-path-card">
+            <h3>{path.title}</h3>
+            <p>{path.copy}</p>
+            <ul>{path.examples.map((example) => <li>{example}</li>)}</ul>
+            <a href={path.href}>Explore this care path</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="modern-section modern-section--sea" aria-labelledby="home-team-heading">
+    <div class="modern-shell modern-team-overview">
+      <article>
+        <p class="modern-eyebrow">People make the difference</p>
+        <h2 id="home-team-heading">Meet the dentists and the team supporting every visit.</h2>
+        <p class="modern-lead">Get to know the providers, hygienists, assistants, and patient-care staff who help make appointments feel organized and comfortable.</p>
+        <div class="modern-actions"><a class="modern-button modern-button--primary" href="/modern/team/">Meet the whole team</a></div>
+      </article>
+      <aside>
+        <h3>What matters to us</h3>
+        <ul>
+          <li>Clear explanations without unnecessary jargon</li>
+          <li>Practical care plans built around each patient</li>
+          <li>A welcoming experience from the first phone call</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="modern-section modern-section--sand" aria-labelledby="home-visit-heading">
+    <div class="modern-shell modern-visit-grid">
+      <article class="modern-visit-card">
+        <p class="modern-eyebrow">New patients</p>
+        <h2 id="home-visit-heading">A simple path from screen to chair.</h2>
+        <ol class="modern-checklist">
+          <li><strong>Call the office.</strong><br />Confirm appointment availability and ask general scheduling questions.</li>
+          <li><strong>Complete the forms.</strong><br />Use the fillable medical-history form and review the privacy notice.</li>
+          <li><strong>Bring the paperwork.</strong><br />Print completed forms and bring them to the office unless a secure delivery method is provided.</li>
+        </ol>
+        <div class="modern-actions">
+          <a class="modern-button modern-button--primary" href="/modern/new-patients/">Read the new-patient guide</a>
+          <a class="modern-button modern-button--secondary" href="/modern/forms/">Open patient forms</a>
+          <a class="modern-button modern-button--secondary" href={mapHref} rel="noopener">Get directions</a>
+        </div>
+      </article>
+      <aside class="modern-visit-card">
+        <h3>Office hours</h3>
+        <table class="modern-hours"><tbody>{site.hours.map((item) => <tr><th scope="row">{item.day}</th><td>{item.hours}</td></tr>)}</tbody></table>
+      </aside>
+    </div>
+  </section>
+
+  <section class="modern-section" aria-labelledby="home-faq-heading">
+    <div class="modern-shell">
+      <div class="modern-section__head"><p class="modern-eyebrow">Helpful answers</p><h2 id="home-faq-heading">Before you visit.</h2></div>
+      <div class="modern-faq-grid">
+        <details class="modern-faq" open><summary>Where is the office?</summary><p>Donovan Family Dentistry is located at 91 Sams Point Road on Lady's Island in Beaufort, South Carolina.</p></details>
+        <details class="modern-faq"><summary>Can I complete forms electronically?</summary><p>Yes. The medical-history form is fillable on many devices. Save it locally, then print and bring it to the office.</p></details>
+        <details class="modern-faq"><summary>Can I send medical details through the website?</summary><p>No. General website inquiries should not include symptoms, diagnoses, medications, insurance identifiers, or other protected health information.</p></details>
+      </div>
+    </div>
+  </section>
+</ModernLayout>

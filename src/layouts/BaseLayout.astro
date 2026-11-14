@@ -1,0 +1,56 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AnnouncementBanner from '../components/AnnouncementBanner.astro';
+import PracticeAnalytics from '../components/PracticeAnalytics.astro';
+import SiteMetadata from '../components/SiteMetadata.astro';
+import site from '../data/site.json';
+import '../styles/global.css';
+import '../styles/review-fixes.css';
+import '../styles/logo-hardening.css';
+import '../styles/font-policy.css';
+import '../styles/production-candidate.css';
+import '../styles/release-16-8.css';
+import '../styles/release-16-11.css';
+import '../styles/release-16-12.css';
+import '../styles/release-16-13.css';
+import '../styles/release-17-1.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const {
+  title = site.seo.title,
+  description = site.seo.description,
+  image = site.socialImage,
+  imageAlt = site.heroAlt
+} = Astro.props;
+const fullAddress = `${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.postalCode}`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <SiteMetadata
+      title={title}
+      description={description}
+      image={image}
+      imageAlt={imageAlt}
+      themeColor="#004b66"
+    />
+    <PracticeAnalytics />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <Header />
+    <AnnouncementBanner />
+    <main id="main-content"><slot /></main>
+    <Footer fullAddress={fullAddress} />
+  </body>
+</html>

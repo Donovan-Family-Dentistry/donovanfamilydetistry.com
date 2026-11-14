@@ -1,0 +1,95 @@
+[
+  {
+    "target": "public/images/office-exterior.webp",
+    "chunks": [
+      "office-exterior.webp.b64.000",
+      "office-exterior.webp.b64.001"
+    ],
+    "encoding": "gzip+base64",
+    "sourceBytes": 18284
+  },
+  {
+    "target": "public/images/dr-william-donovan-family.webp",
+    "chunks": [
+      "dr-william-donovan-family.webp.v2.b64.000",
+      "dr-william-donovan-family.webp.v2.b64.001",
+      "dr-william-donovan-family.webp.v2.b64.002a",
+      "dr-william-donovan-family.webp.v2.b64.002b",
+      "dr-william-donovan-family.webp.v2.b64.002c",
+      "dr-william-donovan-family.webp.v2.b64.002d"
+    ],
+    "encoding": "gzip+base64",
+    "sourceBytes": 27036,
+    "sha256": "cc9bb047d6f8cd52b5edae0ebf69cb4df2d53ed6bf23f751dc24c498e04dd2c7"
+  },
+  {
+    "target": "public/forms/Donovan-Medical-History-3-17.pdf",
+    "chunks": [
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.000",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.001",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.002",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.003",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.004",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.005",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.006",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.007",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.008",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.009",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.010",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.011",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.012",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.013",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.014",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.015",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.016",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.017",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.018",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.019",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.020",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.021",
+      "Donovan-Medical-History-3-17.pdf.fillable.v2.b64.022"
+    ],
+    "encoding": "gzip+base64",
+    "sourceBytes": 1111573,
+    "sha256": "d3713d5fd6052206f8b2b68c692f95233063f2ff01583ec021eee5f0d0f0b27e"
+  },
+  {
+    "target": "public/forms/donovan-family-dentistry-privacy-policy.pdf",
+    "chunks": [
+      "donovan-family-dentistry-privacy-policy.pdf.fillable.v2.b64.000",
+      "donovan-family-dentistry-privacy-policy.pdf.fillable.v2.b64.001",
+      "donovan-family-dentistry-privacy-policy.pdf.fillable.v2.b64.002",
+      "donovan-family-dentistry-privacy-policy.pdf.fillable.v2.b64.003"
+    ],
+    "encoding": "gzip+base64",
+    "sourceBytes": 197299,
+    "sha256": "8a72eec19622706fd922d6c4ba14adbaf55ec7df8648d8ca257923e96c934ded"
+  },
+  {
+    "target": "public/images/dr-william-donovan-photo-r16-12.webp",
+    "chunks": [
+      "dr-william-donovan-photo.webp.v4.b64.000",
+      "dr-william-donovan-photo.webp.v4.b64.001",
+      "dr-william-donovan-photo.webp.v4.b64.002",
+      "dr-william-donovan-photo.webp.v4.b64.003"
+    ],
+    "encoding": "gzip+base64",
+    "sourceBytes": 35822,
+    "sha256": "5332280b31c7f0e909dbc75f3ac2b51599d274cabd1e1101f2cb36d840f5c8de"
+  },
+  {
+    "target": "public/images/dr-jordan-henke-family-r16-12.webp",
+    "chunks": [
+      "dr-jordan-henke-family.webp.v4.b64.000",
+      "dr-jordan-henke-family.webp.v4.b64.001",
+      "dr-jordan-henke-family.webp.v4.b64.002a",
+      "dr-jordan-henke-family.webp.v4.b64.002b",
+      "dr-jordan-henke-family.webp.v4.b64.003a",
+      "dr-jordan-henke-family.webp.v4.b64.003b",
+      "dr-jordan-henke-family.webp.v4.b64.004"
+    ],
+    "encoding": "gzip+base64",
+    "sourceBytes": 49098,
+    "sha256": "ede295f255493a68f5efd2c0853da9b878a7838e0dce96be88834a1c9252d385"
+  }
+]

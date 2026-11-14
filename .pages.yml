@@ -1,0 +1,163 @@
+media:
+  - name: images
+    label: Website images
+    input: public/images
+    output: /images
+    extensions: [png, jpg, jpeg, webp, svg]
+    rename: safe
+  - name: forms
+    label: Patient PDF forms
+    input: public/forms
+    output: /forms
+    extensions: [pdf]
+    rename: safe
+
+settings:
+  hide: true
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      create: "office update: add {filename}"
+      update: "office update: revise {filename}"
+      delete: "office update: remove {filename}"
+
+actions:
+  - name: verify-website
+    label: Build and verify website
+    workflow: office-site-check.yml
+    ref: current
+    cancelable: false
+
+content:
+  - name: quick-updates
+    label: Current website quick updates
+    type: group
+    items:
+      - name: site
+        label: Contact, hours, homepage, and announcement
+        type: file
+        path: src/data/site.json
+        format: json
+        operations:
+          create: false
+          rename: false
+          delete: false
+        fields:
+          - { name: practiceName, label: Practice name, type: string, required: true }
+          - { name: tagline, label: Homepage headline, type: string, required: true, options: { maxlength: 110 } }
+          - { name: introduction, label: Homepage introduction, type: text, required: true, options: { maxlength: 350 } }
+          - { name: phoneDisplay, label: Display phone number, type: string, required: true }
+          - { name: phoneHref, label: Click-to-call number, type: string, required: true, description: "Use +1 followed by the ten-digit number." }
+          - { name: contactEmail, label: Office email address, type: string, required: true, description: "Public office contact email used on the Contact page and contact card." }
+          - name: address
+            label: Address
+            type: object
+            required: true
+            fields:
+              - { name: street, label: Street, type: string, required: true }
+              - { name: city, label: City, type: string, required: true }
+              - { name: state, label: State, type: string, required: true }
+              - { name: postalCode, label: ZIP code, type: string, required: true }
+          - name: hours
+            label: Office hours
+            type: object
+            list:
+              min: 7
+              max: 7
+              collapsible:
+                collapsed: true
+                summary: "{day}: {hours}"
+            fields:
+              - { name: day, label: Day, type: string, required: true, readonly: true }
+              - { name: hours, label: Hours, type: string, required: true }
+          - { name: heroImage, label: Office image, type: image, required: true, options: { media: images } }
+          - { name: heroAlt, label: Office image description, type: text, required: true, description: "Describe the image for visitors who cannot see it." }
+          - { name: socialImage, label: Social sharing image, type: image, required: true, options: { media: images } }
+          - { name: logo, label: Practice logo, type: image, required: true, options: { media: images } }
+          - { name: logoAlt, label: Logo description, type: string, required: true }
+          - name: serviceArea
+            label: Communities served
+            type: string
+            list: true
+          - name: announcement
+            label: Homepage announcement
+            type: object
+            fields:
+              - { name: enabled, label: Show announcement, type: boolean }
+              - { name: text, label: Announcement text, type: text, options: { maxlength: 300 }, description: "Required when the announcement is turned on." }
+          - name: seo
+            label: Search preview
+            type: object
+            fields:
+              - { name: title, label: Homepage page title, type: string, required: true, options: { maxlength: 65 } }
+              - { name: description, label: Homepage description, type: text, required: true, options: { maxlength: 165 } }
+
+  - name: dentists
+    label: Dentist profiles
+    type: group
+    items:
+      - name: providers
+        label: Current dentists
+        type: file
+        path: src/data/providers.json
+        format: json
+        list: true
+        operations:
+          create: false
+          rename: false
+          delete: false
+        fields:
+          - { name: id, label: Internal ID, type: string, required: true, readonly: true }
+          - { name: name, label: Public name, type: string, required: true }
+          - { name: credentials, label: Credentials, type: string }
+          - { name: role, label: Role, type: string, required: true }
+          - { name: visible, label: Show profile, type: boolean }
+          - { name: order, label: Display order, type: number, required: true }
+          - { name: status, label: Approval status, type: string, required: true, description: "Use verified or approved before showing a real profile. Sample profiles cannot be visible." }
+          - { name: imageType, label: Image type, type: string, required: true, description: "Use photo or illustration." }
+          - { name: photo, label: Photograph, type: image, options: { media: images } }
+          - { name: photoAlt, label: Photograph description, type: text }
+          - { name: portrait, label: Illustration style, type: string, readonly: true }
+          - { name: summary, label: Short summary, type: text, required: true }
+          - { name: biography, label: Current Classic biography paragraphs, type: text, list: true, required: true }
+          - { name: details, label: Future-design biography paragraphs, type: text, list: true, required: true, readonly: true }
+          - { name: highlights, label: Future-design profile highlights, type: string, list: true, required: true, readonly: true }
+
+  - name: patient-information
+    label: Services and patient forms
+    type: group
+    items:
+      - name: services
+        label: Published services
+        type: file
+        path: src/data/services.json
+        format: json
+        list: true
+        operations:
+          create: false
+          rename: false
+          delete: false
+        fields:
+          - { name: name, label: Service name, type: string, required: true, options: { maxlength: 100 } }
+          - { name: visible, label: Show service, type: boolean }
+          - { name: order, label: Display order, type: number, required: true }
+          - { name: groupId, label: Internal service group, type: string, required: true, readonly: true }
+      - name: forms
+        label: Downloadable patient forms
+        type: file
+        path: src/data/forms.json
+        format: json
+        list: true
+        operations:
+          create: false
+          rename: false
+          delete: false
+        fields:
+          - { name: title, label: Form title, type: string, required: true }
+          - { name: description, label: Description, type: text, required: true }
+          - { name: file, label: PDF file, type: file, required: true, options: { media: forms, extensions: [pdf] } }
+          - { name: visible, label: Show form, type: boolean }
+          - { name: order, label: Display order, type: number, required: true }
+          - { name: fillable, label: Fillable on a device, type: boolean, readonly: true }

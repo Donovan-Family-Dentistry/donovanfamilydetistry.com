@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "release": 17,
+  "phase": "production",
+  "selectedDesign": "classic",
+  "targetDomain": "donovanfamilydentistry.com",
+  "canonicalOrigin": "https://donovanfamilydentistry.com",
+  "productionCutoverApproved": true,
+  "indexingApproved": true,
+  "inquiryLaunchMode": "preview-only",
+  "analyticsApproved": true,
+  "changeWindow": "2026-08-13 21:30-23:30 America/New_York (owner-authorized after-hours cutover)",
+  "rollbackOwner": "Eddie (authorized owner/delegate)",
+  "reviewSupport": {
+    "path": "/review/",
+    "status": "available-local-only",
+    "storesOrSendsData": false,
+    "guide": "docs/physical-device-review-guide.md"
+  },
+  "requiredEvidence": [
+    {
+      "id": "provider-roster",
+      "label": "Current dentist roster and publication approval",
+      "status": "verified",
+      "evidenceRef": "src/data/providers.json",
+      "clearanceNeeded": "Owner confirmed on 2026-08-09 that the approved current roster is Dr. William Donovan and Dr. Jordan Henke, including Dr. Donovan's updated photograph and two-daughters biography wording. Reopen only if the provider roster changes."
+    },
+    {
+      "id": "services",
+      "label": "Current Classic services and patient-friendly terminology",
+      "status": "verified",
+      "evidenceRef": "src/data/content-status.json#classic-content-approval",
+      "clearanceNeeded": "Owner approved the current Classic Services page as presented on 2026-08-09. Reopen only if the Classic service list or wording changes materially."
+    },
+    {
+      "id": "insurance-payment",
+      "label": "Classic insurance/payment publication decision",
+      "status": "verified",
+      "evidenceRef": "src/data/content-status.json#insurance-network-status",
+      "clearanceNeeded": "Owner confirmed on 2026-08-09 that the practice is in-network with no dental insurance provider and insured patients are treated as out-of-network. The approved Classic launch does not publish an in-network participation claim. Modern-only financial-policy wording remains a future-design follow-up."
+    },
+    {
+      "id": "urgent-care-wording",
+      "label": "Classic urgent/after-hours publication decision",
+      "status": "verified",
+      "evidenceRef": "src/data/content-status.json#classic-content-approval",
+      "clearanceNeeded": "Owner approved the current Classic site as presented on 2026-08-09. No additional Modern-only urgent/after-hours copy is required for the Classic cutover; revisit it only as part of future Modern development."
+    },
+    {
+      "id": "production-integrations",
+      "label": "Administrative inquiry launch decision and operating controls",
+      "status": "approved-deferred",
+      "evidenceRef": "src/data/content-status.json#administrative-inquiry-deferred",
+      "clearanceNeeded": "Owner decided on 2026-08-09 that the Classic launch will use telephone, public office email, address/directions, contact card, and downloadable PDFs. Keep the administrative inquiry disabled; do not create Basin or Turnstile production resources until the future Modern/Secure Exchange decision and then-current office mailbox are known."
+    },
+    {
+      "id": "physical-device-review",
+      "label": "Physical-device and current-browser matrix",
+      "status": "approved-deferred",
+      "evidenceRef": "docs/evidence/production-cutover-2026-08-13.md#required-evidence-dispositions",
+      "clearanceNeeded": "Owner authorized the production cutover with the recorded Android physical-device pass, current-browser automation, and mobile/desktop change-window validation. Remaining physical iPhone, iPad, macOS, and Windows checks stay documented as post-launch follow-up and are not represented as completed."
+    },
+    {
+      "id": "human-wcag-review",
+      "label": "Human WCAG 2.2 AA and supported-PDF review",
+      "status": "approved-deferred",
+      "evidenceRef": "docs/evidence/production-cutover-2026-08-13.md#required-evidence-dispositions",
+      "clearanceNeeded": "Owner authorized the production cutover with the automated WCAG, keyboard, reflow, compatibility, and PDF availability gates retained. Complete the broader human assistive-technology and supported-PDF application review as documented post-launch work; do not claim complete conformance."
+    },
+    {
+      "id": "dns-zone-backup",
+      "label": "Complete production DNS-zone backup",
+      "status": "verified",
+      "evidenceRef": "docs/evidence/production-cutover-2026-08-13.md#dns-evidence-and-integrity",
+      "clearanceNeeded": "The accepted GoDaddy and final staged Cloudflare exports, SHA-256 digests, record count, TTLs, proxy states, nameservers, and rollback values were recorded before the web change."
+    },
+    {
+      "id": "email-service-preservation",
+      "label": "MX, SPF, DKIM, DMARC, autodiscover, and mail-service preservation",
+      "status": "verified",
+      "evidenceRef": "docs/evidence/production-cutover-2026-08-13.md#dns-evidence-and-integrity",
+      "clearanceNeeded": "MX, SPF, Microsoft verification, autodiscover, mail-service CNAMEs, and SIP/SRV records were reconciled and rechecked on both authoritative Cloudflare nameservers without edits."
+    },
+    {
+      "id": "portal-scheduling-preservation",
+      "label": "Portal, scheduling, payment, and other application records",
+      "status": "verified",
+      "evidenceRef": "docs/evidence/production-cutover-2026-08-13.md#dns-evidence-and-integrity",
+      "clearanceNeeded": "The accepted zone contained no Open Dental, portal, scheduling, payment, or other vendor-specific DNS record. All 22 non-web records were preserved and no application service was created, deleted, or rerouted."
+    },
+    {
+      "id": "rollback-rehearsal",
+      "label": "DNS and Cloudflare rollback rehearsal",
+      "status": "verified",
+      "evidenceRef": "docs/evidence/production-cutover-2026-08-13.md#rollback-posture",
+      "clearanceNeeded": "Prior web values, the last-green Pages deployment, the reachable legacy origin, web-only rollback steps, and nameserver rollback threshold are recorded."
+    },
+    {
+      "id": "change-window",
+      "label": "Approved launch window and named operators",
+      "status": "verified",
+      "evidenceRef": "docs/evidence/production-cutover-2026-08-13.md#authorization-and-window",
+      "clearanceNeeded": "Eddie authorized the monitored after-hours window and is the owner/delegate, office verifier, and rollback decision-maker; Codex is the delegated DNS and website operator."
+    }
+  ],
+  "publicDomainObservation": {
+    "status": "verified-authoritative-cutover",
+    "observedOn": "2026-08-13",
+    "evidenceRef": "docs/evidence/production-cutover-2026-08-13.md#dns-evidence-and-integrity",
+    "workflowRunId": 30718591705,
+    "artifactDigest": "sha256:8b0eb8289db550a0736aef6505b39cca2f93573f511a25516548e1a57532c8d7",
+    "authoritativeZoneExportStillRequired": false
+  },
+  "currentSiteSources": [
+    {
+      "id": "current-home",
+      "url": "https://donovanfamilydentistry.com/",
+      "reviewedOn": "2026-08-01",
+      "purpose": "Current public service list, practice tagline, patient forms, contact path, and directions."
+    },
+    {
+      "id": "current-about",
+      "url": "https://donovanfamilydentistry.com/about/",
+      "reviewedOn": "2026-08-01",
+      "purpose": "Current public provider roster, provider biographies, and practice-history text."
+    },
+    {
+      "id": "current-procedures",
+      "url": "https://donovanfamilydentistry.com/procedures/",
+      "reviewedOn": "2026-08-01",
+      "purpose": "Current public twelve-item procedure list."
+    },
+    {
+      "id": "current-forms",
+      "url": "https://donovanfamilydentistry.com/patient-forms/",
+      "reviewedOn": "2026-08-09",
+      "purpose": "Authoritative current-production patient-form and privacy-practices documents; owner supplied the exact original PDFs for exact-layout fillable conversion."
+    },
+    {
+      "id": "current-contact",
+      "url": "https://donovanfamilydentistry.com/contact/",
+      "reviewedOn": "2026-08-01",
+      "purpose": "Current public telephone number and street address."
+    }
+  ]
+}

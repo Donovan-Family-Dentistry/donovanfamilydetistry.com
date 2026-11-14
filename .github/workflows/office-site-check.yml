@@ -1,0 +1,71 @@
+name: Office website check
+
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: Pages CMS action context
+        required: false
+        default: '{}'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  verify-website:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out selected website version
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: npm
+
+      - name: Install locked website dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Review dependency vulnerabilities
+        run: npm audit --audit-level=high
+
+      - name: Check the protected administrative request handler
+        run: npm run test:unit
+
+      - name: Validate office-managed content, images, launch controls, and performance budgets
+        run: npm run build
+
+      - name: Install Chromium, Firefox, and WebKit
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Install branded Chrome and Edge
+        run: npx playwright install chrome msedge
+
+      - name: Run layout, link, form, mobile, metadata, and accessibility checks
+        run: npm run test:e2e
+
+      - name: Run the production-candidate browser compatibility matrix
+        run: npm run test:compat
+
+      - name: Save a copy of the successfully built website
+        uses: actions/upload-artifact@v4
+        with:
+          name: office-website-build
+          path: dist/
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Write a plain-language result
+        run: |
+          {
+            echo '## Website check passed'
+            echo ''
+            echo 'The already-saved branch is valid; locked-dependency, administrative-request, launch-safety, responsive-image, performance-budget, browser, link, form, mobile, metadata, and automated accessibility checks passed.'
+            echo ''
+            echo 'This manual check does not save content and does not start a separate deployment. Saving to main creates the GitHub commit that triggers the normal Cloudflare Pages deployment; compare the workflow commit with the Cloudflare deployment commit.'
+            echo ''
+            echo 'Automated browser emulation does not replace the real-device and office-approval items listed in docs/release-14-production-candidate.md.'
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,31 @@
+{
+  "team": [
+    {
+      "id": "front-office-team",
+      "name": "Front Office Team",
+      "role": "Scheduling and patient support",
+      "portrait": "frontdesk",
+      "visible": true,
+      "status": "role-based",
+      "bio": "The front office helps with scheduling, forms, directions, benefit information, and the administrative details that prepare patients for a visit."
+    },
+    {
+      "id": "dental-hygiene-team",
+      "name": "Dental Hygiene Team",
+      "role": "Preventive care and patient education",
+      "portrait": "hygienist1",
+      "visible": true,
+      "status": "role-based",
+      "bio": "The hygiene team supports preventive visits, periodontal monitoring, and practical guidance patients can use between appointments."
+    },
+    {
+      "id": "dental-assisting-team",
+      "name": "Dental Assisting Team",
+      "role": "Clinical preparation and chairside support",
+      "portrait": "assistant1",
+      "visible": true,
+      "status": "role-based",
+      "bio": "The assisting team prepares treatment rooms, supports procedures, and helps patients understand what to expect during the clinical portion of a visit."
+    }
+  ]
+}

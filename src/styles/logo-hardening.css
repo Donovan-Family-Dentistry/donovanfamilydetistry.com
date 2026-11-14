@@ -1,0 +1,84 @@
+:root,
+html,
+body,
+.modern-body {
+  color-scheme: only light;
+}
+
+/*
+ * The white rounded card is part of the active SVG itself. Keep every logo
+ * wrapper flush with the artwork and give the replaced-image element the same
+ * explicit light surface so device forced-dark heuristics cannot recolor the
+ * transparent replaced-element canvas or create a second visible card.
+ */
+.brand,
+.footer-brand-card,
+.modern-brand,
+.modern-footer__logo-card {
+  overflow: hidden !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 1rem !important;
+  background-color: #fff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  forced-color-adjust: none;
+  isolation: isolate;
+}
+
+.footer-brand-card,
+.modern-footer__logo-card {
+  width: min(19rem, 100%);
+}
+
+.brand img,
+.footer-brand-card img,
+.modern-brand img,
+.modern-footer__logo-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  background-color: #fff !important;
+  background-image: none !important;
+  filter: none !important;
+  forced-color-adjust: none;
+  mix-blend-mode: normal;
+}
+
+@media (max-width: 760px) {
+  .modern-footer__grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 2.25rem !important;
+  }
+
+  .modern-footer__grid > * {
+    min-width: 0;
+  }
+
+  .modern-footer__links {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .55rem 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .modern-footer__bottom {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: .85rem;
+  }
+
+  .modern-footer a,
+  .modern-footer p,
+  .modern-footer span {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 420px) {
+  .modern-footer__links {
+    grid-template-columns: 1fr;
+  }
+}

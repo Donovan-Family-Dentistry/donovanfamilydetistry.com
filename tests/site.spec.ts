@@ -1,0 +1,285 @@
+import { createHash } from 'node:crypto';
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+
+const classicPages = ['/', '/about/', '/services/', '/forms/', '/contact/'];
+const modernPages = ['/modern/', '/modern/about/', '/modern/services/', '/modern/team/', '/modern/forms/', '/modern/contact/'];
+const pages = [...classicPages, ...modernPages];
+
+for (const path of pages) {
+  test(`${path} has no serious accessibility violations`, async ({ page }) => {
+    await page.goto(path);
+    await expect(page.locator('main')).toBeVisible();
+    const results = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
+      .analyze();
+    expect(results.violations.filter((item) => ['serious', 'critical'].includes(item.impact ?? ''))).toEqual([]);
+  });
+}
+
+test('classic primary actions work', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: 'Call the office' })).toHaveAttribute('href', 'tel:+18435256866');
+  await expect(page.getByRole('link', { name: 'Patient forms' }).first()).toHaveAttribute('href', '/forms/');
+});
+
+test('approved provider photographs render on the Classic About page', async ({ page }) => {
+  await page.goto('/about/');
+  const donovanPhoto = page.getByRole('img', { name: 'Dr. William Donovan standing with three family members in a historic outdoor courtyard.' });
+  const henkePhoto = page.getByRole('img', { name: 'Dr. Jordan Henke with his wife, Mia, and their four children outdoors.' });
+  await expect(donovanPhoto).toBeVisible();
+  await expect(donovanPhoto).toHaveAttribute('src', '/images/dr-william-donovan-photo.webp');
+  await expect(henkePhoto).toBeVisible();
+  await expect(henkePhoto).toHaveAttribute('src', '/images/dr-jordan-henke-family.webp');
+  expect(await donovanPhoto.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  expect(await henkePhoto.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+});
+
+test('directions button has visible text contrast', async ({ page }) => {
+  await page.goto('/contact/');
+  const button = page.getByRole('link', { name: 'Open directions' });
+  await expect(button).toBeVisible();
+  const styles = await button.evaluate((element) => {
+    const computed = getComputedStyle(element);
+    return { color: computed.color, backgroundColor: computed.backgroundColor };
+  });
+  expect(styles.color).not.toBe(styles.backgroundColor);
+});
+
+test('classic and modern concepts use the same protected logo asset without filters', async ({ page }) => {
+  for (const path of ['/', '/modern/']) {
+    await page.goto(path);
+    const selector = path === '/' ? '.brand' : '.modern-brand';
+    const logo = page.locator(`${selector} img`);
+    const styles = await page.locator(selector).evaluate((element) => {
+      const computed = getComputedStyle(element);
+      const image = element.querySelector('img');
+      const imageStyles = image ? getComputedStyle(image) : null;
+      return {
+        background: computed.backgroundColor,
+        radius: computed.borderRadius,
+        overflow: computed.overflow,
+        imageBackground: imageStyles?.backgroundColor ?? '',
+        imageRadius: imageStyles?.borderRadius ?? '',
+        imageFilter: imageStyles?.filter ?? ''
+      };
+    });
+    expect(styles.imageFilter).toBe('none');
+    await expect(logo).toHaveAttribute('src', '/images/donovan-logo.svg');
+
+    if (path === '/modern/') {
+      expect(styles.background).toBe('rgba(0, 0, 0, 0)');
+      expect(styles.radius).toBe('0px');
+      expect(styles.overflow).toBe('visible');
+      expect(styles.imageBackground).toBe('rgba(0, 0, 0, 0)');
+      expect(styles.imageRadius).toBe('0px');
+    } else {
+      expect(styles.background).toBe('rgb(255, 255, 255)');
+      expect(Number.parseFloat(styles.radius)).toBeGreaterThan(0);
+      expect(styles.imageBackground).toBe('rgb(255, 255, 255)');
+    }
+  }
+
+  await expect(page.locator('.modern-footer__logo-card img')).toBeVisible();
+});
+
+test('modern concept is self-contained', async ({ page }) => {
+  await page.goto('/modern/');
+  const headerLinks = await page.locator('.modern-header a[href^="/"]').evaluateAll((anchors) =>
+    anchors.map((anchor) => (anchor as HTMLAnchorElement).getAttribute('href')).filter(Boolean)
+  );
+  expect(headerLinks.every((href) => href?.startsWith('/modern/'))).toBeTruthy();
+  await expect(page.getByRole('link', { name: 'Patient forms' }).first()).toHaveAttribute('href', '/modern/forms/');
+  await expect(page.getByRole('link', { name: 'Request a call' })).toHaveAttribute('href', '/modern/contact/');
+});
+
+test('modern concept uses a controlled light palette', async ({ page }) => {
+  await page.goto('/modern/contact/');
+  await expect(page.locator('meta[name="color-scheme"]')).toHaveAttribute('content', 'light');
+  expect(await page.locator('html').evaluate((element) => getComputedStyle(element).colorScheme)).toContain('light');
+});
+
+test('modern hero preserves the full office image and footer logo is visible', async ({ page }) => {
+  await page.goto('/modern/');
+  const hero = page.locator('.modern-hero__visual img');
+  await expect(hero).toBeVisible();
+  expect(await hero.evaluate((image) => getComputedStyle(image).objectFit)).toBe('contain');
+  const footerLogo = page.locator('.modern-footer__logo-card img');
+  await expect(footerLogo).toBeVisible();
+  expect(await footerLogo.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+});
+
+test('modern pages have distinct content responsibilities', async ({ page }) => {
+  await page.goto('/modern/');
+  await expect(page.getByRole('heading', { name: /Dr\. William Donovan/i })).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: /Associate Dentist/i })).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'Begin with what you need today.' })).toBeVisible();
+
+  await page.goto('/modern/about/');
+  await expect(page.getByText('Dr. William Donovan', { exact: false })).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'Common tasks should feel straightforward.' })).toBeVisible();
+
+  await page.goto('/modern/team/');
+  await expect(page.getByRole('heading', { name: 'William Donovan, DMD' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Jordan Henke, DDS' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Associate Dentist, DMD' })).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'Friendly support at each step.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Front Office Team' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Dental Hygiene Team' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Dental Assisting Team' })).toBeVisible();
+});
+
+test('modern service numbers stay below the headings', async ({ page }) => {
+  await page.goto('/modern/services/');
+  const cards = page.locator('.modern-service-card');
+  await expect(cards).toHaveCount(3);
+  for (let index = 0; index < await cards.count(); index += 1) {
+    const metrics = await cards.nth(index).evaluate((element) => {
+      const cardRect = element.getBoundingClientRect();
+      const headingRect = element.querySelector('h3')?.getBoundingClientRect();
+      const pseudo = getComputedStyle(element, '::before');
+      return {
+        pseudoTop: cardRect.top + Number.parseFloat(pseudo.top),
+        headingBottom: headingRect?.bottom ?? cardRect.top,
+        bottom: pseudo.bottom
+      };
+    });
+    expect(metrics.bottom).not.toBe('auto');
+    expect(metrics.pseudoTop).toBeGreaterThan(metrics.headingBottom + 20);
+  }
+});
+
+test('modern secondary actions have a visible outline', async ({ page }) => {
+  await page.goto('/modern/');
+  const button = page.getByRole('link', { name: 'Request a call' });
+  const styles = await button.evaluate((element) => {
+    const computed = getComputedStyle(element);
+    return {
+      width: Number.parseFloat(computed.borderTopWidth),
+      style: computed.borderTopStyle,
+      color: computed.borderTopColor
+    };
+  });
+  expect(styles.width).toBeGreaterThanOrEqual(2);
+  expect(styles.style).toBe('solid');
+  expect(styles.color).not.toBe('rgba(0, 0, 0, 0)');
+});
+
+test('PHI warning stays readable on the contact form', async ({ page }) => {
+  await page.goto('/modern/contact/');
+  const warning = page.locator('.modern-phi-warning');
+  await expect(warning).toContainText('Do not include protected health information.');
+  const styles = await warning.evaluate((element) => {
+    const computed = getComputedStyle(element);
+    return { color: computed.color, background: computed.backgroundColor };
+  });
+  expect(styles.color).toBe('rgb(68, 38, 29)');
+  expect(styles.background).toBe('rgb(255, 242, 237)');
+});
+
+test('free-service integrations default to safe preview mode', async ({ page }) => {
+  await page.goto('/modern/contact/');
+  const form = page.locator('#modern-inquiry-form');
+  await expect(form).toHaveAttribute('data-mode', 'preview');
+  await expect(form).toHaveAttribute('data-turnstile', 'disabled');
+  await expect(page.getByRole('button', { name: 'Preview request' })).toBeVisible();
+  await expect(page.locator('.cf-turnstile')).toHaveCount(0);
+
+  await page.goto('/modern/');
+  await expect(page.locator('script[src="https://static.cloudflareinsights.com/beacon.min.js"]')).toHaveCount(0);
+});
+
+test('modern mobile header shows one Call label', async ({ page, isMobile }) => {
+  test.skip(!isMobile, 'Mobile-only layout assertion');
+  await page.goto('/modern/contact/');
+  const call = page.locator('.modern-header .modern-call');
+  await expect(call).toBeVisible();
+  await expect(call).toHaveText('Call');
+  await expect(call).not.toContainText('CallCall');
+});
+
+test('modern mobile location card does not cover the office image', async ({ page, isMobile }) => {
+  test.skip(!isMobile, 'Mobile-only layout assertion');
+  await page.goto('/modern/');
+  const imageBox = await page.locator('.modern-hero__visual img').boundingBox();
+  const cardBox = await page.locator('.modern-location-card').boundingBox();
+  expect(imageBox).not.toBeNull();
+  expect(cardBox).not.toBeNull();
+  expect(cardBox!.y).toBeGreaterThanOrEqual(imageBox!.y + imageBox!.height - 2);
+});
+
+test('modern inquiry preview validates locally and sends nothing', async ({ page }) => {
+  await page.goto('/modern/contact/');
+  await page.getByLabel('Name').fill('Alex Patient');
+  await page.getByLabel('Phone').fill('(843) 555-0100');
+  await page.getByLabel('Administrative message').fill('I would like a call about scheduling a new-patient visit.');
+  await page.getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Preview request' }).click();
+  const result = page.getByRole('status');
+  await expect(result).toContainText('Preview complete - nothing was sent');
+  await expect(result).toContainText('(843) 555-0100');
+});
+
+test('approved patient forms materialize with the reviewed hashes', async ({ request }) => {
+  const response = await request.get('/forms/Donovan-Medical-History-3-17.pdf');
+  expect(response.status()).toBeLessThan(400);
+  const bytes = Buffer.from(await response.body());
+  expect(bytes.length).toBe(1111573);
+  expect(createHash('sha256').update(bytes).digest('hex')).toBe('d3713d5fd6052206f8b2b68c692f95233063f2ff01583ec021eee5f0d0f0b27e');
+
+  const privacyResponse = await request.get('/forms/donovan-family-dentistry-privacy-policy.pdf');
+  expect(privacyResponse.status()).toBeLessThan(400);
+  const privacyBytes = Buffer.from(await privacyResponse.body());
+  expect(privacyBytes.length).toBe(197299);
+  expect(createHash('sha256').update(privacyBytes).digest('hex')).toBe('8a72eec19622706fd922d6c4ba14adbaf55ec7df8648d8ca257923e96c934ded');
+});
+
+test('internal links and downloadable assets resolve', async ({ page, request }) => {
+  const internalLinks = new Set<string>();
+  for (const path of pages) {
+    await page.goto(path);
+    const links = await page.locator('a[href^="/"]').evaluateAll((anchors) =>
+      anchors.map((anchor) => (anchor as HTMLAnchorElement).getAttribute('href')).filter((href): href is string => Boolean(href))
+    );
+    links.forEach((href) => internalLinks.add(href));
+  }
+  internalLinks.add('/images/dr-william-donovan-photo.webp');
+  internalLinks.add('/images/dr-jordan-henke-family.webp');
+  internalLinks.add('/forms/Donovan-Medical-History-3-17.pdf');
+  internalLinks.add('/forms/donovan-family-dentistry-privacy-policy.pdf');
+  internalLinks.add('/donovan-family-dentistry.vcf');
+  internalLinks.add('/sitemap.xml');
+  internalLinks.add('/robots.txt');
+  for (const href of internalLinks) {
+    const response = await request.get(href);
+    expect(response.status(), `${href} should resolve`).toBeLessThan(400);
+  }
+});
+
+test('classic homepage review screenshot', async ({ page }, testInfo) => {
+  await page.goto('/');
+  await page.screenshot({ path: testInfo.outputPath('classic-homepage.png'), fullPage: true, animations: 'disabled' });
+});
+
+test('modern concept review screenshots', async ({ page }, testInfo) => {
+  await page.goto('/modern/');
+  await page.screenshot({ path: testInfo.outputPath('modern-homepage.png'), fullPage: true, animations: 'disabled' });
+  await page.goto('/modern/about/');
+  await page.screenshot({ path: testInfo.outputPath('modern-about.png'), fullPage: true, animations: 'disabled' });
+  await page.goto('/modern/services/');
+  await page.screenshot({ path: testInfo.outputPath('modern-services.png'), fullPage: true, animations: 'disabled' });
+  await page.goto('/modern/team/');
+  await page.screenshot({ path: testInfo.outputPath('modern-team.png'), fullPage: true, animations: 'disabled' });
+  await page.goto('/modern/contact/');
+  await page.screenshot({ path: testInfo.outputPath('modern-contact.png'), fullPage: true, animations: 'disabled' });
+});
+
+test('classic mobile navigation opens and closes', async ({ page, isMobile }) => {
+  test.skip(!isMobile, 'Mobile-only behavior');
+  await page.goto('/');
+  const header = page.getByRole('banner');
+  const button = header.getByRole('button', { name: 'Menu' });
+  await button.click();
+  await expect(button).toHaveAttribute('aria-expanded', 'true');
+  await expect(header.getByRole('navigation', { name: 'Primary navigation' })).toBeVisible();
+});

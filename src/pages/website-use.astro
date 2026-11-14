@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+import forms from '../data/forms.json';
+const privacyPracticesForm = forms[1];
+---
+<BaseLayout
+  title="Website Use & Privacy | Donovan Family Dentistry"
+  description="Website-use, privacy, administrative-inquiry, emergency, insurance, and document guidance for Donovan Family Dentistry."
+>
+  <header class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Website use & privacy</p>
+      <h1>Use the website for general information—not private clinical communication.</h1>
+      <p class="lead">This page explains the safety and privacy boundaries of the public website.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="card-grid">
+        <article class="card">
+          <h2>General information only</h2>
+          <p>Website content is educational and administrative. It does not establish a dentist-patient relationship, replace an examination, provide a diagnosis, or create an individualized treatment plan.</p>
+        </article>
+        <article class="card">
+          <h2>Urgent concerns</h2>
+          <p>Do not rely on a website message for urgent dental or medical concerns. Call the office at <a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>. Call 911 or seek emergency care for difficulty breathing or swallowing, severe uncontrolled bleeding, or a serious face or head injury.</p>
+        </article>
+        <article class="card">
+          <h2>Administrative inquiries</h2>
+          <p>No patient or administrative message form is enabled on the public Classic website. Use the published telephone number or office email for general administrative questions, and do not send symptoms, diagnoses, medications, insurance identifiers, Social Security numbers, treatment details, photographs, files, or medical history by ordinary email.</p>
+        </article>
+        <article class="card">
+          <h2>Online message delivery</h2>
+          <p>The public Classic website does not submit or store an online inquiry. A retained, noindex future-design demonstration may preview a message locally, but it sends nothing. A future live form requires separate office approval, protected delivery configuration, anti-spam controls, and a real delivery test.</p>
+        </article>
+        <article class="card">
+          <h2>Insurance and payment</h2>
+          <p>Benefit information and estimates are not guarantees of payment. Coverage, financial responsibility, payment options, and office policies must be confirmed directly with the practice and the patient's plan before treatment.</p>
+        </article>
+        <article class="card">
+          <h2>Patient forms and local files</h2>
+          <p>Fillable PDFs are completed on the visitor's device. The website does not upload a completed medical-history form. Save and print forms only on a trusted device, and bring them to the office unless the practice provides an approved secure delivery method.</p>
+        </article>
+        <article class="card">
+          <h2>Analytics and technical logs</h2>
+          <p>Google Analytics 4 and Microsoft Clarity measure visits and interactions on public informational pages. Clarity uses cookies for session continuity and may create heatmaps and session recordings; it masks sensitive content by default. Analytics do not load on administrative contact pages, patient-form pages, private review tools, or candidate previews. The website does not send form contents, patient identifiers, custom visitor identifiers, or protected health information to these services. Do not enter health information on the general website. Google and Microsoft process analytics data under their own privacy terms. Hosting and security providers may also maintain ordinary technical logs needed to deliver and protect the site.</p>
+        </article>
+        <article class="card">
+          <h2>Privacy practices</h2>
+          <p>The practice's Notice of Privacy Practices is available as a separate patient document. <a href={privacyPracticesForm.file}>Open the Notice of Privacy Practices</a>.</p>
+        </article>
+        <article class="card">
+          <h2>External services</h2>
+          <p>Directions and other external destinations are governed by their own terms and privacy practices. Confirm addresses, availability, and policies directly before relying on third-party information.</p>
+        </article>
+      </div>
+      <p style="margin-top: 2rem"><strong>Last reviewed:</strong> November 14, 2026</p>
+    </div>
+  </section>
+</BaseLayout>

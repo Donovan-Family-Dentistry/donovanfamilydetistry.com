@@ -1,0 +1,94 @@
+---
+import ModernLayout from '../../layouts/ModernLayout.astro';
+import ModernPortrait from '../../components/ModernPortrait.astro';
+import practiceContent from '../../data/practice-content.json';
+import providers from '../../data/providers.json';
+import site from '../../data/site.json';
+import teamData from '../../data/modern-team.json';
+
+const pageContent = practiceContent.teamPage;
+const visibleProviders = providers.filter((provider) => provider.visible).sort((a, b) => a.order - b.order);
+const visibleTeam = teamData.team.filter((member) => member.visible);
+const legacyPhotoFallbacks: Record<string, string> = {
+  'william-donovan': '/images/dr-william-donovan-photo.webp',
+  'jordan-henke': '/images/dr-jordan-henke-family.webp'
+};
+---
+<ModernLayout title="Meet the Dentists and Team | Donovan Family Dentistry" description="Meet Dr. William Donovan, Dr. Jordan Henke, and the patient-care team at Donovan Family Dentistry.">
+  <section class="modern-page-hero">
+    <div class="modern-shell modern-page-hero__grid">
+      <div><p class="modern-kicker">{pageContent.kicker}</p><h1>{pageContent.headline}</h1></div>
+      <p class="modern-page-hero__aside">{pageContent.introduction}</p>
+    </div>
+  </section>
+
+  <section class="modern-section modern-section--sea" aria-labelledby="providers-heading">
+    <div class="modern-shell">
+      <div class="modern-section__head">
+        <p class="modern-eyebrow">{pageContent.providersEyebrow}</p>
+        <h2 id="providers-heading">{pageContent.providersTitle}</h2>
+        <p>{pageContent.providersIntroduction}</p>
+      </div>
+      <div class="modern-provider-list">
+        {visibleProviders.map((provider, index) => (
+          <article class:list={['modern-doctor', index % 2 === 1 && 'modern-doctor--reverse']} id={`provider-${provider.id}`}>
+            <figure class="modern-doctor__photo">
+              {provider.imageType === 'photo' && provider.photo
+                ? <img
+                    src={legacyPhotoFallbacks[provider.id] ?? provider.photo}
+                    srcset={`${provider.photo} 480w`}
+                    sizes="(max-width: 520px) calc(100vw - 2rem), 480px"
+                    width="240"
+                    height="180"
+                    alt={provider.photoAlt}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                : <ModernPortrait name={provider.name} variant={provider.portrait} />}
+            </figure>
+            <div>
+              <p class="modern-eyebrow">{provider.role}</p>
+              <h2>{provider.name}{provider.credentials ? `, ${provider.credentials}` : ''}</h2>
+              <div class="modern-doctor__highlights">{provider.highlights.map((item) => <span class="modern-chip">{item}</span>)}</div>
+              {provider.details.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="modern-section" aria-labelledby="care-team-heading">
+    <div class="modern-shell">
+      <div class="modern-section__head">
+        <p class="modern-eyebrow">{pageContent.teamEyebrow}</p>
+        <h2 id="care-team-heading">{pageContent.teamTitle}</h2>
+        <p>{pageContent.teamIntroduction}</p>
+      </div>
+      <div class="modern-team-grid">
+        {visibleTeam.map((member) => (
+          <article class="modern-team-card">
+            <ModernPortrait name={member.name} variant={member.portrait} />
+            <div class="modern-team-card__body">
+              <h3>{member.name}</h3>
+              <span class="modern-team-card__role">{member.role}</span>
+              <p>{member.bio}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="modern-section modern-section--deep">
+    <div class="modern-shell modern-visit-grid">
+      <article>
+        <p class="modern-eyebrow">Need help before a visit?</p>
+        <h2>Start with the patient-care team.</h2>
+        <p class="modern-lead">Call for scheduling, directions, forms, and general administrative questions.</p>
+        <div class="modern-actions"><a class="modern-button modern-button--coral" href={`tel:${site.phoneHref}`}>Call {site.phoneDisplay}</a><a class="modern-button modern-button--secondary" href="/modern/contact/">General inquiry</a></div>
+      </article>
+      <aside class="modern-visit-card"><h3>Privacy reminder</h3><p>Do not send symptoms, diagnoses, medication lists, insurance identifiers, or treatment details through a general website inquiry.</p></aside>
+    </div>
+  </section>
+</ModernLayout>

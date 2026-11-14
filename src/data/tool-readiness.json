@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "release": 16,
+  "reviewedOn": "2026-08-02",
+  "actualDomainCutoverRelease": 17,
+  "cms": {
+    "product": "Pages CMS hosted app",
+    "editorUrl": "https://app.pagescms.org/",
+    "repository": "SteadyEddieSC/donovan-family-dentistry-demo",
+    "normalBranch": "main",
+    "repositoryConfiguration": "ready",
+    "operationalAcceptance": "pending-owner-test",
+    "cost": "$0 hosted service",
+    "acceptanceSteps": [
+      "An owner or authorized administrator installs or authorizes the Pages CMS GitHub App for the private repository.",
+      "The office editor signs in and opens the main branch.",
+      "The editor makes a harmless announcement-text edit while keeping the announcement hidden.",
+      "The editor saves the change and runs Build and verify website.",
+      "The owner confirms the GitHub commit, successful workflow, and Cloudflare rebuild.",
+      "The owner restores the prior wording and confirms the recovery commit and rebuild."
+    ]
+  },
+  "legacySite": {
+    "domain": "donovanfamilydentistry.com",
+    "webAddress": "107.180.115.120",
+    "dnsProviderObservation": "GoDaddy domaincontrol.com nameservers",
+    "hostingObservation": "The web address is within a GoDaddy-owned network range, so the legacy origin is likely hosted on GoDaddy infrastructure.",
+    "hostingProductConfirmed": false,
+    "hostingProductNeeded": "Confirm the exact GoDaddy product, subscription owner, renewal date, control-panel access, document root, backups, and cancellation timing from the GoDaddy account or invoice.",
+    "mailObservation": "Microsoft 365 mail routing and Outlook autodiscover are publicly visible; the current SPF record also references secureserver.net.",
+    "tlsObservation": "The legacy certificate was observed expired, but that alone does not prove the remaining website content or hosting account is unavailable.",
+    "migrationRule": "Change only the apex and www web records after preserving every mail and application record."
+  },
+  "tools": [
+    {
+      "id": "pages-cms",
+      "label": "Self-edit website CMS",
+      "provider": "Pages CMS",
+      "status": "configured-pending-acceptance",
+      "cost": "$0",
+      "phiAllowed": false,
+      "codeReady": true,
+      "accountReady": false,
+      "ownerDecisionNeeded": true,
+      "blockers": [
+        "Authorize the Pages CMS GitHub App for the private repository.",
+        "Confirm who will hold repository and editor access.",
+        "Complete a real save, verification workflow, Cloudflare rebuild, and recovery exercise."
+      ]
+    },
+    {
+      "id": "cloudflare-pages",
+      "label": "Website hosting and deployment",
+      "provider": "Cloudflare Pages",
+      "status": "preview-deployed",
+      "cost": "$0 at current project scale",
+      "phiAllowed": false,
+      "codeReady": true,
+      "accountReady": true,
+      "ownerDecisionNeeded": true,
+      "blockers": [
+        "Complete all launch evidence.",
+        "Attach the real domain during an approved change window.",
+        "Change only the minimum apex and www records and verify rollback."
+      ]
+    },
+    {
+      "id": "turnstile",
+      "label": "Public-form bot protection",
+      "provider": "Cloudflare Turnstile",
+      "status": "code-ready-unconfigured",
+      "cost": "$0 on the Free plan",
+      "phiAllowed": false,
+      "codeReady": true,
+      "accountReady": false,
+      "ownerDecisionNeeded": true,
+      "blockers": [
+        "Create an office-controlled widget.",
+        "Restrict the widget to approved preview and production hostnames.",
+        "Store the site key and secret only in Cloudflare environment settings.",
+        "Complete a real verification test."
+      ]
+    },
+    {
+      "id": "administrative-inquiry",
+      "label": "General administrative inquiry delivery",
+      "provider": "Basin through the same-origin Cloudflare function",
+      "status": "code-ready-disabled",
+      "cost": "$0 for light testing; current paid entry tier is approximately $12.50 per month when billed yearly",
+      "phiAllowed": false,
+      "codeReady": true,
+      "accountReady": false,
+      "ownerDecisionNeeded": true,
+      "blockers": [
+        "Decide whether launch remains preview-only or enables delivery.",
+        "Create an office-owned Basin endpoint and notification mailbox.",
+        "Approve retention, deletion, response owner, backup owner, and rate limiting.",
+        "Complete successful and failure-path delivery tests without PHI."
+      ]
+    },
+    {
+      "id": "web-analytics",
+      "label": "Privacy-first website analytics",
+      "provider": "Google Analytics 4 and Microsoft Clarity",
+      "status": "configured-pending-acceptance",
+      "cost": "$0",
+      "phiAllowed": false,
+      "codeReady": true,
+      "accountReady": true,
+      "ownerDecisionNeeded": false,
+      "blockers": [
+        "Verify collection on the canonical production host after the separately authorized cutover.",
+        "Keep candidate previews, contact pages, patient-form pages, and private review tools excluded."
+      ]
+    },
+    {
+      "id": "search-console",
+      "label": "Search ownership and indexing",
+      "provider": "Google Search Console",
+      "status": "post-cutover",
+      "cost": "$0",
+      "phiAllowed": false,
+      "codeReady": true,
+      "accountReady": false,
+      "ownerDecisionNeeded": true,
+      "blockers": [
+        "Complete the real-domain cutover and canonical-host verification.",
+        "Approve public indexing.",
+        "Verify domain ownership and submit the production sitemap."
+      ]
+    },
+    {
+      "id": "secure-patient-intake",
+      "label": "Secure online patient intake",
+      "provider": "Open Dental Web Forms (confirmed practice system; exact office setup not yet verified)",
+      "status": "not-selected",
+      "cost": "Web Forms are included at no additional fee for practices on active Open Dental support; optional form conversion or service work may cost extra",
+      "phiAllowed": true,
+      "codeReady": false,
+      "accountReady": false,
+      "ownerDecisionNeeded": true,
+      "blockers": [
+        "Confirm the office's active Open Dental support status, current version, and eConnector health.",
+        "Approve the registration, medical-history, consent, and privacy Sheets and enable the mobile layout.",
+        "Obtain and test the exact office-specific Web Forms URL and redirect behavior without placing the form in an iframe.",
+        "Approve patient matching, staff review, import, correction, retention, downtime, and incident procedures before publishing the link.",
+        "Keep completed forms and patient information out of the public repository and the general administrative inquiry path."
+      ]
+    },
+    {
+      "id": "scheduling-messaging-payments",
+      "label": "Online scheduling, patient messaging, payments, and reviews",
+      "provider": "Open Dental eServices and Patient Portal (confirmed system of record; specific services not yet selected)",
+      "status": "not-selected",
+      "cost": "Patient Portal, Web Forms, eReminders, and General Messages are included with active support; Web Sched, eConfirmations, texting, eClipboard, and bundle options may add fees",
+      "phiAllowed": true,
+      "codeReady": false,
+      "accountReady": false,
+      "ownerDecisionNeeded": true,
+      "blockers": [
+        "Inventory the office's currently enabled Open Dental eServices, eConnector configuration, texting number, portal settings, and payment workflow.",
+        "Decide whether to enable Patient Portal, Web Sched, eConfirmations, Integrated Texting, eClipboard, payments, or review requests.",
+        "Confirm appointment types, providers, operatories, availability rules, staff ownership, message timing, opt-out handling, and downtime procedures.",
+        "Obtain and test exact office-specific URLs before adding any patient-facing website link.",
+        "Use the Open Dental API rather than direct database writes if a custom two-way integration is later approved."
+      ]
+    }
+  ]
+}

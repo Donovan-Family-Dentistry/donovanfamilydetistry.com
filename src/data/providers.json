@@ -1,0 +1,65 @@
+[
+  {
+    "id": "william-donovan",
+    "name": "William Donovan",
+    "credentials": "DMD",
+    "role": "General Dentist",
+    "visible": true,
+    "order": 1,
+    "status": "verified",
+    "imageType": "photo",    "photo": "/images/dr-william-donovan-photo-r16-12.webp",
+    "photoAlt": "Dr. William Donovan standing with three family members in a historic outdoor courtyard.",
+    "photoCaption": "",
+    "photoWidth": 480,
+    "photoHeight": 428,
+    "portrait": "provider",
+    "summary": "A Navy-trained dentist whose career has combined advanced general-dentistry education, service, and long-standing ties to Beaufort.",
+    "biography": [
+      "Dr. William Donovan spent much of his life in and around the dental profession. The grandson of a dentist, he decided at an early age to pursue a career in dentistry. After graduating from Presbyterian College in Clinton, South Carolina, with a degree in Biology, he attended dental school at the Medical College of Georgia in Augusta, Georgia. Before starting dental school, he worked as a dental lab technician at one of the most prominent labs in the Southeast.",
+      "While in school, he accepted a commission as a Dental Officer in the U.S. Navy. After graduation, he began a rigorous twelve-month Advanced Education in General Dentistry residency. Dr. Donovan served for eight years in locations including Chicago, Biloxi, and Spain before being stationed at MCRD Parris Island. While at Parris Island, he worked with Navy specialists and trained annually at the National Naval Medical Center. The highlight of his Naval career was a two-year tour with the Navy Seabees, NMCB Seven, which included a ten-month overseas deployment.",
+      "Upon moving to Beaufort, Dr. Donovan had the pleasure of getting to know Dr. Jack McGill. After almost two years of friendship, Dr. Donovan began working for Dr. McGill for several months before taking over the practice following Dr. McGill's retirement.",
+      "Dr. Donovan is married to Mary Beth Donovan, a nurse practitioner at Beaufort Memorial Hospital. The couple has two daughters. They enjoy traveling, spending time outdoors, participating in organizations in the Beaufort community, and are members of Sea Island Presbyterian Church."
+    ],
+    "details": [
+      "Dr. Donovan graduated from Presbyterian College and attended dental school at the Medical College of Georgia. Before dental school, he worked as a dental laboratory technician, experience that shaped his attention to restorative detail.",
+      "He served as a U.S. Navy Dental Officer, completed an Advanced Education in General Dentistry residency, and later made Beaufort home after being stationed at MCRD Parris Island.",
+      "Outside the practice, Dr. Donovan and Mary Beth enjoy life with their two daughters, including traveling, spending time outdoors, and participating in the Beaufort community."
+    ],
+    "highlights": [
+      "U.S. Navy Dental Officer",
+      "Advanced Education in General Dentistry",
+      "Beaufort community"
+    ]
+  },
+  {
+    "id": "jordan-henke",
+    "name": "Jordan Henke",
+    "credentials": "DDS",
+    "role": "General Dentist",
+    "visible": true,
+    "order": 2,
+    "status": "verified",
+    "imageType": "photo",    "photo": "/images/dr-jordan-henke-family-r16-12.webp",
+    "photoAlt": "Dr. Jordan Henke with his wife, Mia, and their four children outdoors.",
+    "photoCaption": "",
+    "photoWidth": 480,
+    "photoHeight": 714,
+    "portrait": "provider",
+    "summary": "A Navy-trained general dentist committed to comprehensive care, continuing education, and life in the Lowcountry.",
+    "biography": [
+      "A Montana native, Dr. Henke earned his Bachelor of Science in Biology at the University of Mary in North Dakota. He then completed his Doctorate of Dental Surgery at the University of Colorado School of Dental Medicine. After dental school, he was commissioned as a Dental Officer in the U.S. Navy, where he also completed a year-long Advanced Education in General Dentistry program. Following five years of active duty, he transitioned to private practice while continuing to serve in the Naval Reserves.",
+      "With a strong commitment to high-quality patient care, Dr. Henke offers a wide range of comprehensive dental services. His Navy experience gave him the opportunity to work closely with specialists across all fields of dentistry, further broadening his skills. He is passionate about lifelong learning through continuing education and is currently working toward Fellowship with the Academy of General Dentistry and Diplomate status with the American Academy of Dental Sleep Medicine.",
+      "The Navy brought Dr. Henke and his family to Beaufort, where they have fallen in love with the landscape and rich history of the area. Outside the office, Dr. Henke enjoys spending time with his wife, Mia, and their four children. Together, they are making the most of life in the Lowcountry and taking every opportunity to spend time outdoors."
+    ],
+    "details": [
+      "A Montana native, Dr. Henke earned a Bachelor of Science in Biology from the University of Mary and a Doctorate of Dental Surgery from the University of Colorado School of Dental Medicine.",
+      "He served five years on active duty as a U.S. Navy Dental Officer, completed an Advanced Education in General Dentistry program, and continues to serve in the Naval Reserves.",
+      "Dr. Henke values comprehensive care and continuing education. Outside the office, he enjoys Lowcountry life with his wife, Mia, and their four children."
+    ],
+    "highlights": [
+      "U.S. Navy Dental Officer",
+      "Advanced Education in General Dentistry",
+      "Continuing education"
+    ]
+  }
+]

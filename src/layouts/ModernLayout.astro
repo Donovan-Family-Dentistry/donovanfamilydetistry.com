@@ -1,0 +1,134 @@
+---
+import AnnouncementBanner from '../components/AnnouncementBanner.astro';
+import SiteMetadata from '../components/SiteMetadata.astro';
+import site from '../data/site.json';
+import '../styles/modern.css';
+import '../styles/modern-a11y.css';
+import '../styles/modern-v2.css';
+import '../styles/modern-v2-fixes.css';
+import '../styles/modern-v3.css';
+import '../styles/modern-v4.css';
+import '../styles/modern-v5.css';
+import '../styles/logo-hardening.css';
+import '../styles/font-policy.css';
+import '../styles/production-candidate.css';
+import '../styles/release-16-1.css';
+import '../styles/release-16-2.css';
+import '../styles/release-16-3.css';
+import '../styles/release-16-4.css';
+import '../styles/release-16-5.css';
+import '../styles/release-16-6.css';
+import '../styles/release-16-7.css';
+import '../styles/release-16-8.css';
+import '../styles/release-16-9.css';
+import '../styles/release-16-10.css';
+import '../styles/release-16-11.css';
+import '../styles/release-16-12.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  forceNoIndex?: boolean;
+}
+
+const {
+  title = "Future Design Demo | Donovan Family Dentistry",
+  description = 'A retained future-design demonstration for Donovan Family Dentistry on Lady’s Island in Beaufort, South Carolina.',
+  image = site.socialImage,
+  imageAlt = site.heroAlt
+} = Astro.props;
+const forceNoIndex = true;
+const path = Astro.url.pathname;
+const fullAddress = `${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.postalCode}`;
+const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`;
+const modernLogo = site.logo;
+const nav = [
+  { href: '/modern/', label: 'Home' },
+  { href: '/modern/about/', label: 'About' },
+  { href: '/modern/services/', label: 'Services' },
+  { href: '/modern/team/', label: 'Team' },
+  { href: '/modern/new-patients/', label: 'New Patients' },
+  { href: '/modern/forms/', label: 'Patient Forms' },
+  { href: '/modern/contact/', label: 'Contact' }
+];
+const isActive = (href: string) => href === '/modern/' ? path === href : path.startsWith(href);
+const isReview = path.startsWith('/review/');
+const showMobileDock = !isReview && path !== '/modern/' && !path.startsWith('/modern/contact/');
+const bodyClass = showMobileDock ? 'modern-body modern-body--with-dock' : 'modern-body';
+const openDays = site.hours.filter((item) => item.hours !== 'Closed');
+const openHours = openDays[0]?.hours ?? '';
+const openDayRange = openDays.length > 1 ? `${openDays[0].day}–${openDays[openDays.length - 1].day}` : openDays[0]?.day ?? '';
+const contextLabel = isReview
+  ? 'Private review utility. Not part of the public website.'
+  : 'Future design demo. Not the current public website.';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <SiteMetadata
+      title={title}
+      description={description}
+      image={image}
+      imageAlt={imageAlt}
+      themeColor="#fffdf9"
+      forceNoIndex={forceNoIndex}
+    />
+  </head>
+  <body class={bodyClass}>
+    <a class="modern-skip" href="#modern-main">Skip to main content</a>
+    <header class="modern-header">
+      <div class="modern-shell modern-header__inner">
+        <a class="modern-brand" href="/modern/" aria-label="Donovan Family Dentistry future design demo home">
+          <img src={modernLogo} width="510" height="138" alt={site.logoAlt} decoding="async" />
+        </a>
+        <nav class="modern-nav" aria-label="Future design demo navigation">
+          {nav.map((item) => <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>)}
+        </nav>
+        <details class="modern-menu">
+          <summary>Menu</summary>
+          <nav aria-label="Future design demo mobile navigation">
+            {nav.map((item) => <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>)}
+          </nav>
+        </details>
+        <a class="modern-call" href={`tel:${site.phoneHref}`} aria-label={`Call Donovan Family Dentistry at ${site.phoneDisplay}`}>Call</a>
+      </div>
+    </header>
+    <AnnouncementBanner />
+    <main id="modern-main"><slot /></main>
+    <footer class="modern-footer">
+      <div class="modern-shell modern-footer__grid">
+        <div>
+          <div class="modern-footer__logo-card"><img src={modernLogo} width="510" height="138" alt={site.logoAlt} loading="lazy" decoding="async" /></div>
+          <p>A welcoming Lady's Island dental practice rooted in Beaufort and the Lowcountry.</p>
+        </div>
+        <div>
+          <h2>Explore demo</h2>
+          <ul class="modern-footer__links">
+            {nav.slice(1).map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <h2>Visit</h2>
+          <p><a href={mapHref} rel="noopener">{fullAddress}</a></p>
+          <p><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a></p>
+          <p>{openDayRange}<br />{openHours}</p>
+          <p><a href="/donovan-family-dentistry.vcf" download>Download contact card</a></p>
+        </div>
+      </div>
+      <div class="modern-shell modern-footer__bottom">
+        <span>© {new Date().getFullYear()} Donovan Family Dentistry. {contextLabel}</span>
+        <span>{site.previewMode && <><a class="review-preview-link" href="/review/">Review this device</a> · <a class="review-preview-link" href="/review/open-dental/">Open Dental readiness</a> · </>}<a href="/accessibility/">Accessibility</a> · <a href="/website-use/">Website use & privacy</a> · <a href="/forms/donovan-family-dentistry-privacy-policy.pdf">Privacy practices</a> · <a href="/">View the current Classic website</a></span>
+      </div>
+    </footer>
+    {showMobileDock && <nav class="modern-mobile-dock" aria-label="Quick actions">
+      <a href={`tel:${site.phoneHref}`}>Call</a>
+      <a href={mapHref} rel="noopener">Directions</a>
+      <a href="/modern/forms/">Forms</a>
+    </nav>}
+  </body>
+</html>
