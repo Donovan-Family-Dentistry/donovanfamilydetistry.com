@@ -1,7 +1,7 @@
 [
   {
     "id": "william-donovan",
-    "name": "Dr. William Donovan",
+    "name": "William Donovan",
     "credentials": "DMD",
     "role": "General Dentist",
     "visible": true,
@@ -10,9 +10,6 @@
     "imageType": "photo",
     "photo": "/images/dr-william-donovan-photo-r16-12.webp",
     "photoAlt": "Dr. William Donovan standing with three family members in a historic outdoor courtyard.",
-    "photoCaption": "",
-    "photoWidth": 480,
-    "photoHeight": 428,
     "portrait": "provider",
     "summary": "A Navy-trained dentist whose career has combined advanced general-dentistry education, service, and long-standing ties to Beaufort.",
     "biography": [
@@ -34,7 +31,7 @@
   },
   {
     "id": "jordan-henke",
-    "name": "Dr. Jordan Henke",
+    "name": "Jordan Henke",
     "credentials": "DDS",
     "role": "General Dentist",
     "visible": true,
@@ -43,9 +40,6 @@
     "imageType": "photo",
     "photo": "/images/dr-jordan-henke-family-r16-12.webp",
     "photoAlt": "Dr. Jordan Henke with his wife, Mia, and their four children outdoors.",
-    "photoCaption": "",
-    "photoWidth": 480,
-    "photoHeight": 714,
     "portrait": "provider",
     "summary": "A Navy-trained general dentist committed to comprehensive care, continuing education, and life in the Lowcountry.",
     "biography": [
