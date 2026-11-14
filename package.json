@@ -28,12 +28,12 @@
   },
   "dependencies": {
     "@microsoft/clarity": "1.0.2",
-    "astro": "7.4.7"
+    "astro": "7.4.10"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
     "@playwright/test": "1.65.0",
-    "parse5": "8.1.0",
+    "parse5": "8.1.1",
     "sharp": "0.35.5",
     "typescript": "7.0.2"
   },
