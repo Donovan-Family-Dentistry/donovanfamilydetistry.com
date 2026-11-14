@@ -8,8 +8,8 @@ on:
         required: false
         default: https://donovanfamilydentistry.com
         type: string
-  schedule:
-    - cron: '17 12 * * *'
+# Destination preparation: manual diagnostics only while the original repository
+# owns production monitoring. Re-enable a schedule only through #65 acceptance.
 
 permissions:
   contents: read

@@ -6,6 +6,14 @@ import { validateOfficeRollback } from '../scripts/validate-office-rollback.mjs'
 const root = new URL('..', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
 
+test('destination preparation cannot schedule a duplicate production monitor or run keepalive', async () => {
+  const monitor = await read('.github/workflows/production-candidate-monitor.yml');
+  assert.doesNotMatch(monitor, /^\s*schedule\s*:/m);
+  assert.match(monitor, /^\s*workflow_dispatch\s*:/m);
+  assert.doesNotMatch(monitor, /^\s*contents:\s*write\s*$/m);
+  await assert.rejects(read('.github/workflows/repository-keepalive.yml'), { code: 'ENOENT' });
+});
+
 test('rollback validator accepts only an office update with office-managed paths', () => {
   assert.deepEqual(validateOfficeRollback('office update: revise site.json', ['src/data/site.json']), { ok: true });
   assert.deepEqual(validateOfficeRollback('office update: add photo', ['public/images/approved.webp']), { ok: true });
